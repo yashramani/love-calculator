@@ -58,7 +58,6 @@ class _TestYourLoveState extends State<TestYourLove> {
         pr = double.parse(percentage);
         yourname.clear();
         yourpartnername.clear();
-
       }
     });
   }
@@ -66,68 +65,133 @@ class _TestYourLoveState extends State<TestYourLove> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(child: Scaffold(
-      body: Stack(
-        children: [ //lovesticker
-          ImageContainer(
-            image: AssetImage('assets/images/lovesticker.jpg'),
-          ),
-          Container(
-            padding: EdgeInsets.only(right: 20.0, left: 20.0),
-            child: Center(
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Gap(20),
-                    const Text(
-                      'Your Name',
-                      style: TextStyle(color: Colors.white, fontSize: 25),
-                    ),
-                    Gap(10),
-                    CommonTextFormFeild(fontcolor: Colors.white,fontsize: 20,focuscolor: Colors.white,controller: yourname,borderColor: Colors.white,cursorcolor: Colors.white,hint: 'Your name',hinttextColor: Colors.white),
-                    Gap(30),
-                    const Text(
-                      'Your crush\'s Name',
-                      style: TextStyle(color: Colors.white, fontSize: 25),
-                    ),
-                    Gap(10),
-                    CommonTextFormFeild(fontcolor: Colors.white,fontsize: 20,focuscolor: Colors.white,controller: yourpartnername,borderColor: Colors.white,cursorcolor: Colors.white,hint: 'Enter your crush\'s  name',hinttextColor: Colors.white),
-                    Gap(30),
-                    SfRadialGauge(enableLoadingAnimation: true, axes: <RadialAxis>[
-                      RadialAxis(minimum: 0, maximum: 100,numberFormat: NumberFormat.compact(),ranges: <GaugeRange>[
-                        GaugeRange(startValue: 0, endValue: 33, color: Colors.red),
-                        GaugeRange(startValue: 33, endValue: 66, color: Colors.blue),
-                        GaugeRange(startValue: 66, endValue: 100, color: Colors.red),
-                      ],pointers: <GaugePointer>[
-                        NeedlePointer(value: percentage == null
-                            ? 0.0
-                            : pr,
-                          enableAnimation: true,needleColor: Colors.white,tailStyle: TailStyle(color: Colors.white),)
-                      ], annotations: <GaugeAnnotation>[
-                        GaugeAnnotation(
-                            widget: Container(
-                                child: Text(pr.toString() + '%',
-                                    style: TextStyle(
-                                        fontSize: 40, color: Colors.white,fontWeight: FontWeight.bold))),
-                            angle: 90,
-                            positionFactor: 0.5)
-                      ])
-                    ]),
-                    Gap(30),
-                    HomeScreenButton(context, () {
-                      validation();
-                    }, 'Click Here', Colors.white, Colors.white),
-                    Spacer(),
-                  ],
+      body: Container(
+        height: MediaQuery.of(context).size.height-MediaQuery.of(context).viewInsets.bottom,
+        decoration: BoxDecoration(
+          image: DecorationImage(image: AssetImage('assets/images/lovesticker.jpg'),fit: BoxFit.cover),
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                padding: EdgeInsets.only(right: 20.0, left: 20.0),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Gap(80),
+                      const Text(
+                        'Your Name',
+                        style: TextStyle(color: Colors.white, fontSize: 25),
+                      ),
+                      Gap(10),
+                      CommonTextFormFeild(fontcolor: Colors.white,fontsize: 20,focuscolor: Colors.white,controller: yourname,borderColor: Colors.white,cursorcolor: Colors.white,hint: 'Your name',hinttextColor: Colors.white),
+                      Gap(30),
+                      const Text(
+                        'Your crush\'s Name',
+                        style: TextStyle(color: Colors.white, fontSize: 25),
+                      ),
+                      Gap(10),
+                      CommonTextFormFeild(fontcolor: Colors.white,fontsize: 20,focuscolor: Colors.white,controller: yourpartnername,borderColor: Colors.white,cursorcolor: Colors.white,hint: 'Enter your crush\'s  name',hinttextColor: Colors.white),
+                      Gap(30),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height / 3,
+                        width: MediaQuery.of(context).size.width / 1.5,
+                        child: SfRadialGauge(enableLoadingAnimation: true, axes: <RadialAxis>[
+                          RadialAxis(minimum: 0, maximum: 100,numberFormat: NumberFormat.compact(),ranges: <GaugeRange>[
+                            GaugeRange(startValue: 0, endValue: 33, color: Colors.red),
+                            GaugeRange(startValue: 33, endValue: 66, color: Colors.blue),
+                            GaugeRange(startValue: 66, endValue: 100, color: Colors.red),
+                          ],pointers: <GaugePointer>[
+                            NeedlePointer(value: percentage == null
+                                ? 0.0
+                                : pr,
+                              enableAnimation: true,needleColor: Colors.white,tailStyle: TailStyle(color: Colors.white),)
+                          ], annotations: <GaugeAnnotation>[
+                            GaugeAnnotation(
+                                widget: Container(
+                                    child: Text(pr.toString() + '%',
+                                        style: TextStyle(
+                                            fontSize: 40, color: Colors.white,fontWeight: FontWeight.bold))),
+                                angle: 90,
+                                positionFactor: 0.5)
+                          ])
+                        ]),
+                      ),
+                      Gap(30),
+                      HomeScreenButton(context, () {
+                        validation();
+                      }, 'Click Here', Colors.white, Colors.white),
+                    ],
+                  ),
                 ),
-              ),
-            ),
-          )
-        ],
+              )
+            ],
+          ),
+        ),
       ),
     ));
   }
 }
-
-
+//
+// Stack(
+// children: [ //lovesticker
+// ImageContainer(
+// image: AssetImage('assets/images/lovesticker.jpg'),
+// ),
+// Container(
+// padding: EdgeInsets.only(right: 20.0, left: 20.0),
+// child: Center(
+// child: Form(
+// key: _formKey,
+// child: Column(
+// mainAxisAlignment: MainAxisAlignment.center,
+// children: [
+// Gap(20),
+// const Text(
+// 'Your Name',
+// style: TextStyle(color: Colors.white, fontSize: 25),
+// ),
+// Gap(10),
+// CommonTextFormFeild(fontcolor: Colors.white,fontsize: 20,focuscolor: Colors.white,controller: yourname,borderColor: Colors.white,cursorcolor: Colors.white,hint: 'Your name',hinttextColor: Colors.white),
+// Gap(30),
+// const Text(
+// 'Your crush\'s Name',
+// style: TextStyle(color: Colors.white, fontSize: 25),
+// ),
+// Gap(10),
+// CommonTextFormFeild(fontcolor: Colors.white,fontsize: 20,focuscolor: Colors.white,controller: yourpartnername,borderColor: Colors.white,cursorcolor: Colors.white,hint: 'Enter your crush\'s  name',hinttextColor: Colors.white),
+// Gap(30),
+// SfRadialGauge(enableLoadingAnimation: true, axes: <RadialAxis>[
+// RadialAxis(minimum: 0, maximum: 100,numberFormat: NumberFormat.compact(),ranges: <GaugeRange>[
+// GaugeRange(startValue: 0, endValue: 33, color: Colors.red),
+// GaugeRange(startValue: 33, endValue: 66, color: Colors.blue),
+// GaugeRange(startValue: 66, endValue: 100, color: Colors.red),
+// ],pointers: <GaugePointer>[
+// NeedlePointer(value: percentage == null
+// ? 0.0
+// : pr,
+// enableAnimation: true,needleColor: Colors.white,tailStyle: TailStyle(color: Colors.white),)
+// ], annotations: <GaugeAnnotation>[
+// GaugeAnnotation(
+// widget: Container(
+// child: Text(pr.toString() + '%',
+// style: TextStyle(
+// fontSize: 40, color: Colors.white,fontWeight: FontWeight.bold))),
+// angle: 90,
+// positionFactor: 0.5)
+// ])
+// ]),
+// Gap(30),
+// HomeScreenButton(context, () {
+// validation();
+// }, 'Click Here', Colors.white, Colors.white),
+// Spacer(),
+// ],
+// ),
+// ),
+// ),
+// )
+// ],
+// )

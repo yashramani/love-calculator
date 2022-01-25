@@ -31,12 +31,8 @@ class _CheckPartnerNameState extends State<CheckPartnerName> {
 
   GenerateCharactor(){
     String randomchar = randomAlpha(1);
-    print('+++++++++++++++++');
-    print(randomchar);
     setState(() {
       pname = randomchar;
-      print('-------------------');
-      print(pname);
     });
   }
 
@@ -73,8 +69,7 @@ class _CheckPartnerNameState extends State<CheckPartnerName> {
                           borderRadius: BorderRadius.circular(10),
                           color: Colors.transparent.withOpacity(0.2),
                           border: Border.all(color: Colors.pink)),
-                      child: Center(child: Text("$pname",style: TextStyle(fontFamily: 'ZenTokyo',fontSize: 80.0,color: Colors.pink),),
-                      ),
+                      child: Text("$pname",style: TextStyle(fontFamily: 'ZenTokyo',fontSize: 80.0,color: Colors.pink),),
                     ),
                     Spacer(),
                     HomeScreenButton(context, () {

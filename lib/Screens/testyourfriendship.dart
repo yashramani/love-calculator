@@ -19,7 +19,7 @@ class _TestYourFriendShipState extends State<TestYourFriendShip> {
   TextEditingController yourpartnername = TextEditingController();
   late String firstName, secondName;
   String percentage = '';
-  late double pr = 0.0;
+   double pr = 0.0;
 
   validation() {
     if (_formKey.currentState!.validate()) {
@@ -63,60 +63,96 @@ class _TestYourFriendShipState extends State<TestYourFriendShip> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(child: Scaffold(
-      body: Stack(
-        children: [
-          ImageContainer(
-            image: AssetImage('assets/images/friendship.jpg'),
-          ),
-          Container(
-            padding: EdgeInsets.only(right: 20.0, left: 20.0),
-            child: Center(
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Spacer(),
-                    const Text(
-                      'Your Name',
-                      style: TextStyle(color: Colors.white, fontSize: 25),
-                    ),
-                    Gap(10),
-                    CommonTextFormFeild(fontcolor: Colors.white,fontsize: 20,focuscolor: Colors.white,controller: yourname,borderColor: Colors.white,cursorcolor: Colors.white,hint: 'Your name',hinttextColor: Colors.white),
-                    Gap(30),
-                    const Text(
-                      'Your friend\'s Name',
-                      style: TextStyle(color: Colors.white, fontSize: 25),
-                    ),
-                    Gap(10),
-                    CommonTextFormFeild(fontcolor: Colors.white,fontsize: 20,focuscolor: Colors.white,controller: yourpartnername,borderColor: Colors.white,cursorcolor: Colors.white,hint: 'Enter your friend\'s  name',hinttextColor: Colors.white),
-                    Gap(50),
-                    SfLinearGauge(
-                      animateRange: true,
-                      ranges: [
-                        LinearGaugeRange(
-                          startValue: 0,
-                          endValue: pr,
-                        ),
-                      ],
-                      markerPointers: [
-                        LinearShapePointer(
-                          value: pr,
-                        ),
-                      ],
-                      barPointers: [LinearBarPointer(value: 100)],
-                    ),
-                    Gap(50),
-                    HomeScreenButton(context, () {
-                      validation();
-                    }, 'Check FriendShip', Colors.white, Colors.white),
-                    Spacer(),
-                  ],
+      body: Container(
+        height: MediaQuery.of(context).size.height-MediaQuery.of(context).viewInsets.bottom,
+        decoration: BoxDecoration(
+          image: DecorationImage(image: AssetImage('assets/images/friendship.jpg'),fit: BoxFit.cover),
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                padding: EdgeInsets.only(right: 20.0, left: 20.0),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Gap(50),
+                      const Text(
+                        'Your Name',
+                        style: TextStyle(color: Colors.white, fontSize: 25),
+                      ),
+                      Gap(10),
+                      CommonTextFormFeild(fontcolor: Colors.white,fontsize: 20,focuscolor: Colors.white,controller: yourname,borderColor: Colors.white,cursorcolor: Colors.white,hint: 'Your name',hinttextColor: Colors.white),
+                      Gap(30),
+                      const Text(
+                        'Your friend\'s Name',
+                        style: TextStyle(color: Colors.white, fontSize: 25),
+                      ),
+                      Gap(10),
+                      CommonTextFormFeild(fontcolor: Colors.white,fontsize: 20,focuscolor: Colors.white,controller: yourpartnername,borderColor: Colors.white,cursorcolor: Colors.white,hint: 'Enter your friend\'s  name',hinttextColor: Colors.white),
+                      SfRadialGauge(
+                          axes: <RadialAxis>[
+                            RadialAxis(minimum: 0,
+                                maximum: 100,
+                                startAngle: 270,
+                                endAngle: 270,
+                                showLabels: true,
+                                showTicks: true,
+                                radiusFactor: 0.6,
+                                axisLineStyle: AxisLineStyle(
+                                    cornerStyle: CornerStyle.bothFlat,
+                                    color: Colors.black12,
+                                    thickness: 12),
+                                pointers: <GaugePointer>[
+                                  RangePointer(
+                                    value: pr,
+                                    cornerStyle: CornerStyle.bothFlat,
+                                    width: 12,
+                                    sizeUnit: GaugeSizeUnit.logicalPixel,
+                                    color: Colors.grey,
+                                  ),
+
+                                  MarkerPointer(
+                                      value: pr,
+                                      enableDragging: true,
+                                      enableAnimation: true,
+                                      markerHeight: 20,
+                                      markerWidth: 20,
+                                      markerType: MarkerType.diamond,
+                                      color: Colors.white,
+                                      borderWidth: 2,
+                                      borderColor: Colors.white54)
+                                ],
+                                annotations: <GaugeAnnotation>[
+                                  GaugeAnnotation(
+                                      angle: 90,
+                                      axisValue: 5,
+                                      positionFactor: 0.1,
+                                      widget: Text(pr
+                                          .toString() + '%',
+                                          style: TextStyle(
+                                              fontSize: 50,
+                                              fontWeight: FontWeight
+                                                  .bold,
+                                              color: Colors.white))
+                                  )
+                                ]
+                            )
+                          ]
+                      ),
+                      HomeScreenButton(context, () {
+                        validation();
+                      }, 'Check FriendShip', Colors.white, Colors.white),
+                      Gap(50),
+                    ],
+                  ),
                 ),
-              ),
-            ),
-          )
-        ],
+              )
+            ],
+          ),
+        ),
       ),
     ));
   }
